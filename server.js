@@ -15,7 +15,7 @@ app.use(express.json());
 app.use("/api/users", userroute);
 app.use("/api/notes", notesroute);
 //-------------
-var cors = require("cors");
+const cors = require("cors");
 
 app.use(cors());
 //---------------
