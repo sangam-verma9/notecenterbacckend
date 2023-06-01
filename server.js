@@ -17,7 +17,7 @@ app.use("/api/notes", notesroute);
 //-------------
 const cors = require("cors");
 
-app.use(cors());
+app.use(cors({ origin: "*" }));
 //---------------
 
 app.get("/", (req, res) => {
