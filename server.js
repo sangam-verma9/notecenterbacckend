@@ -13,7 +13,7 @@ connectdb();
 //-------------
 const cors = require("cors");
 
-app.use(cors({ origin: "https://notecenter.netlify.app/" }));
+app.use(cors({ origin: "https://notecenter.netlify.app" }));
 //------------
 app.use(express.json());
 //-------------
