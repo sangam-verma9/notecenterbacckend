@@ -11,10 +11,6 @@ const port = process.env.PORT || 5000;
 connectdb();
 
 app.use(express.json());
-//-------------
-// const cors = require("cors");
-
-// app.use(cors({ origin: "*" }));
 
 // Add headers
 app.use(function (req, res, next) {
