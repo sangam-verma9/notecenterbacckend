@@ -11,14 +11,8 @@ const port = process.env.PORT || 5000;
 connectdb();
 
 app.use(express.json());
-
-app.use("/api/users", userroute);
-app.use("/api/notes", notesroute);
 //-------------
-// const cors = require("cors");
 
-// app.use(cors({ origin: "*" }));
-//------------
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
@@ -27,6 +21,14 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST");
   next();
 });
+app.use("/api/users", userroute);
+app.use("/api/notes", notesroute);
+//-------------
+// const cors = require("cors");
+
+// app.use(cors({ origin: "*" }));
+//------------
+
 //-------------
 
 // Add headers
@@ -58,6 +60,9 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
   res.send("Hello world");
 });
+
+app.use("/api/users", userroute);
+app.use("/api/notes", notesroute);
 
 //for error messages from middleware
 app.use(notFound);
