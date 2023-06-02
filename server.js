@@ -10,24 +10,24 @@ dotenv.config();
 const port = process.env.PORT || 5000;
 connectdb();
 
+//-------------
+const cors = require("cors");
+
+app.use(cors({ origin: "https://beautiful-lollipop-83129c.netlify.app" }));
+//------------
 app.use(express.json());
 //-------------
 
-app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://beautiful-lollipop-83129c.netlify.app"
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST");
-  next();
-});
-app.use("/api/users", userroute);
-app.use("/api/notes", notesroute);
-//-------------
-// const cors = require("cors");
-
-// app.use(cors({ origin: "*" }));
-//------------
+// app.use((req, res, next) => {
+//   res.header(
+//     "Access-Control-Allow-Origin",
+//     "https://beautiful-lollipop-83129c.netlify.app"
+//   );
+//   res.header("Access-Control-Allow-Methods", "GET, POST");
+//   next();
+// });
+// app.use("/api/users", userroute);
+// app.use("/api/notes", notesroute);
 
 //-------------
 
