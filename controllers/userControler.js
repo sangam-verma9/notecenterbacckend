@@ -11,7 +11,7 @@ const registeruser = asynchandler(async (req, res) => {
     res.status(400);
     throw new Error("user already exist");
   }
-  const newuser = User.create({ name, email, password });
+  const newuser =await User.create({ name, email, password });
   if (newuser) {
     res.status(201).json({
       _id: newuser._id,
@@ -48,6 +48,9 @@ const authuser = asynchandler(async (req, res) => {
   const { email, password } = req.body;
   const existuser = await User.findOne({ email });
   // console.log(existuser);
+  if(!existuser){
+    throw new Error("envalid email or password");
+  }
   try {
     const ispassword = await bcrypt.compare(password, existuser.password);
     if (ispassword) {

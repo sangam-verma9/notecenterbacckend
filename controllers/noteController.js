@@ -1,27 +1,15 @@
 const asynchandler = require("express-async-handler");
 const Note = require("../models/noteModel");
 
-// const getnote = asynchandler(async (req, res) => {
-//   const note = await Note.find({req.user._id});
-//   res.json(note);
-// });
-
 const getnote = asynchandler(async (req, res) => {
-  const note = await Note.find();
+  const note = await Note.find({user: req.user.id});
   res.json(note);
 });
 
-const createnote = asynchandler(async (req, res) => {
-  const { title, content, category } = req.body;
-  if (!title || !content || !category) {
-    res.status(400);
-    throw new Error("please fill all the fields");
-  } else {
-    const note = Note.create({ title, content, category });
-    // const createnote = await note.save();
-    res.status(201).json(createnote);
-  }
-});
+// const getnote = asynchandler(async (req, res) => {
+//   const note = await Note.find();
+//   res.json(note);
+// });
 
 // const createnote = asynchandler(async (req, res) => {
 //   const { title, content, category } = req.body;
@@ -29,11 +17,23 @@ const createnote = asynchandler(async (req, res) => {
 //     res.status(400);
 //     throw new Error("please fill all the fields");
 //   } else {
-//     const note = new Note({ user: req.user._id, title, content, category });
-//     const createnote = await note.save();
+//     const note = Note.create({ title, content, category });
+//     // const createnote = await note.save();
 //     res.status(201).json(createnote);
 //   }
 // });
+
+const createnote = asynchandler(async (req, res) => {
+  const { title, content, category } = req.body;
+  if (!title || !content || !category) {
+    res.status(400);
+    throw new Error("please fill all the fields");
+  } else {
+    const note = new Note({ user: req.user, title, content, category });
+    const createnote = await note.save();
+    res.status(201).json(createnote);
+  }
+});
 
 const getnotebyid = asynchandler(async (req, res) => {
   const note = await Note.findById(req.params.id);
